@@ -161,7 +161,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card mb-3\" style=\"max-width: 730px;\">\n  <div class=\"row no-gutters\">\n    <div class=\"col-md-2\">\n      <img src=\"{{tweet.profileImageUrl}}\" class=\"card-img\">\n    </div>\n    <div class=\"col-md-10\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\"><a [text]=\"tweet.user.name\" [href]=\"tweet.user.profileUrl\" target=\"_blank\"></a></h5>\n        <p class=\"card-text\">{{ tweet.text }}</p>\n        <div [innerHTML]=\"tweet.source\"></div>\n        <p class=\"card-text\">\n          <small class=\"text-muted\">{{ tweet.createdAt | date:'medium' }}</small>\n        </p>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"card mb-3\" style=\"max-width: 730px;\">\n  <div class=\"row no-gutters\">\n    <div class=\"col-md-2\">\n      <img src=\"{{tweet.profileImageUrl}}\" class=\"card-img\">\n    </div>\n    <div class=\"col-md-10\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\"><a [text]=\"tweet.user.name\" [href]=\"tweet.user.profileUrl\" target=\"_blank\"></a></h5>\n        <p class=\"card-text\">{{ tweet.text }}</p>\n        <p class=\"card-text\" [hidden]=\"tweet.entities.hashTags.length == 0\" >Hashtags :\n          <a class=\"hashtag\"\n             *ngFor=\"let hashtag of tweet.entities.hashTags\"\n             [routerLink]=\"['/tweets', hashtag.text]\"\n            >{{hashtag.text}}</a>\n        </p>\n        <div [innerHTML]=\"tweet.source\"></div>\n        <p class=\"card-text\">\n          <small class=\"text-muted\">{{ tweet.createdAt | date:'medium' }}</small>\n        </p>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -172,7 +172,7 @@ module.exports = "<div class=\"card mb-3\" style=\"max-width: 730px;\">\n  <div 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".status {\n  background: #c0392b; }\n  .status.complated {\n    background: #2ecc71; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9ndXJrYW5jYWtpci93b3Jrc3BhY2UvdHdpdHRlci1hcGkvc3JjL21haW4vZnJvbnRlbmQvc3JjL2FwcC90d2l0dGVyL3R3aXR0ZXItbGlzdC90d2l0dGVyLWxpc3QuY29tcG9uZW50LnNhc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxtQkFBbUIsRUFBQTtFQURyQjtJQUdJLG1CQUFtQixFQUFBIiwiZmlsZSI6InNyYy9hcHAvdHdpdHRlci90d2l0dGVyLWxpc3QvdHdpdHRlci1saXN0LmNvbXBvbmVudC5zYXNzIiwic291cmNlc0NvbnRlbnQiOlsiLnN0YXR1cyB7XG4gIGJhY2tncm91bmQ6ICNjMDM5MmI7XG4gICYuY29tcGxhdGVkIHtcbiAgICBiYWNrZ3JvdW5kOiAjMmVjYzcxOyB9IH1cbiJdfQ== */"
+module.exports = ".status {\n  background: #c0392b; }\n  .status.complated {\n    background: #2ecc71; }\n  .hashtag {\n  padding-right: 1em; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9ndXJrYW5jYWtpci93b3Jrc3BhY2UvdHdpdHRlci1hcGkvc3JjL21haW4vZnJvbnRlbmQvc3JjL2FwcC90d2l0dGVyL3R3aXR0ZXItbGlzdC90d2l0dGVyLWxpc3QuY29tcG9uZW50LnNhc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxtQkFBbUIsRUFBQTtFQURyQjtJQUdJLG1CQUFtQixFQUFBO0VBQ3ZCO0VBQ0Usa0JBQWtCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC90d2l0dGVyL3R3aXR0ZXItbGlzdC90d2l0dGVyLWxpc3QuY29tcG9uZW50LnNhc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3RhdHVzIHtcbiAgYmFja2dyb3VuZDogI2MwMzkyYjtcbiAgJi5jb21wbGF0ZWQge1xuICAgIGJhY2tncm91bmQ6ICMyZWNjNzE7IH0gfVxuLmhhc2h0YWcge1xuICBwYWRkaW5nLXJpZ2h0OiAxZW07IH1cbiJdfQ== */"
 
 /***/ }),
 

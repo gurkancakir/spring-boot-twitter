@@ -7,7 +7,7 @@ export interface Tweet {
   createdAt:string;
   fromUser:string;
   profileImageUrl:string;
-  entities:Entities[];
+  entities:Entities;
   user:User;
   source:string;
 }

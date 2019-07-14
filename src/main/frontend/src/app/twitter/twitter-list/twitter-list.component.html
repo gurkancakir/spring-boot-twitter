@@ -7,6 +7,12 @@
       <div class="card-body">
         <h5 class="card-title"><a [text]="tweet.user.name" [href]="tweet.user.profileUrl" target="_blank"></a></h5>
         <p class="card-text">{{ tweet.text }}</p>
+        <p class="card-text" [hidden]="tweet.entities.hashTags.length == 0" >Hashtags :
+          <a class="hashtag"
+             *ngFor="let hashtag of tweet.entities.hashTags"
+             [routerLink]="['/tweets', hashtag.text]"
+            >{{hashtag.text}}</a>
+        </p>
         <div [innerHTML]="tweet.source"></div>
         <p class="card-text">
           <small class="text-muted">{{ tweet.createdAt | date:'medium' }}</small>
