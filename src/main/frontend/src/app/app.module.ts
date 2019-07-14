@@ -9,6 +9,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
 import {TwitterTrendComponent} from "./twitter/twitter-trend/twitter-trend.component";
+import {} from 'node_modules/bootstrap';
 
 const appRoutes: Routes = [
   { path: 'trends', component: TwitterTrendComponent },
