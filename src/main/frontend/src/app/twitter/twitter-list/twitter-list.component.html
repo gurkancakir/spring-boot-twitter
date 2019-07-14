@@ -1,0 +1,17 @@
+<div class="card mb-3" style="max-width: 730px;">
+  <div class="row no-gutters">
+    <div class="col-md-2">
+      <img src="{{tweet.profileImageUrl}}" class="card-img">
+    </div>
+    <div class="col-md-10">
+      <div class="card-body">
+        <h5 class="card-title"><a [text]="tweet.user.name" [href]="tweet.user.profileUrl" target="_blank"></a></h5>
+        <p class="card-text">{{ tweet.text }}</p>
+        <div [innerHTML]="tweet.source"></div>
+        <p class="card-text">
+          <small class="text-muted">{{ tweet.createdAt | date:'medium' }}</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

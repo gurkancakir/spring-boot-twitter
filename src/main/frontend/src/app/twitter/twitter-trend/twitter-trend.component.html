@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li *ngFor="let trend of trends" class="list-group-item">
+        <a [routerLink]="['/tweets', trend.query]">{{trend.name}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
