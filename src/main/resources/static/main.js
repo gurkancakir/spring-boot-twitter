@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <app-twitter></app-twitter>\n</div>\n"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n  <a class=\"navbar-brand\" href=\"#\">Spring Twitter Client</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse container\" id=\"navbarNavAltMarkup\">\n    <div class=\"navbar-nav\">\n      <a class=\"nav-item nav-link\"\n         [routerLinkActive]=\"['active']\"\n         [routerLinkActiveOptions]=\"{exact:true}\"\n         [routerLink]=\"['/tweets']\">Tweets</a>\n      <a class=\"nav-item nav-link\"\n         [routerLinkActive]=\"['active']\"\n         [routerLinkActiveOptions]=\"{exact:true}\"\n         [routerLink]=\"['/trends']\">Trends</a>\n    </div>\n  </div>\n</nav>\n<div class=\"container\">\n  <router-outlet></router-outlet>\n</div>\n"
 
 /***/ }),
 
@@ -96,6 +96,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _twitter_twitter_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./twitter/twitter.service */ "./src/app/twitter/twitter.service.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _twitter_twitter_trend_twitter_trend_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./twitter/twitter-trend/twitter-trend.component */ "./src/app/twitter/twitter-trend/twitter-trend.component.ts");
 
 
 
@@ -105,6 +107,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+var appRoutes = [
+    { path: 'trends', component: _twitter_twitter_trend_twitter_trend_component__WEBPACK_IMPORTED_MODULE_10__["TwitterTrendComponent"] },
+    {
+        path: 'tweets/:query',
+        component: _twitter_twitter_component__WEBPACK_IMPORTED_MODULE_4__["TwitterComponent"]
+    },
+    {
+        path: 'tweets',
+        component: _twitter_twitter_component__WEBPACK_IMPORTED_MODULE_4__["TwitterComponent"],
+        data: { title: 'Twitter' }
+    },
+    { path: '',
+        redirectTo: '/tweets',
+        pathMatch: 'full'
+    }
+];
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -113,12 +133,15 @@ var AppModule = /** @class */ (function () {
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
                 _twitter_twitter_component__WEBPACK_IMPORTED_MODULE_4__["TwitterComponent"],
-                _twitter_twitter_list_twitter_list_component__WEBPACK_IMPORTED_MODULE_5__["TwitterListComponent"]
+                _twitter_twitter_list_twitter_list_component__WEBPACK_IMPORTED_MODULE_5__["TwitterListComponent"],
+                _twitter_twitter_trend_twitter_trend_component__WEBPACK_IMPORTED_MODULE_10__["TwitterTrendComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"]
+                _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_9__["RouterModule"].forRoot(appRoutes, { enableTracing: true } // <-- debugging purposes only
+                )
             ],
             providers: [_twitter_twitter_service__WEBPACK_IMPORTED_MODULE_6__["TwitterService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -138,7 +161,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tweet-body\">\n  <h1> {{ tweet.user.name }} </h1>\n  {{ tweet.text }}\n  <span> {{ tweet.createdAt | date }}</span>\n</div>\n"
+module.exports = "<div class=\"card mb-3\" style=\"max-width: 730px;\">\n  <div class=\"row no-gutters\">\n    <div class=\"col-md-2\">\n      <img src=\"{{tweet.profileImageUrl}}\" class=\"card-img\">\n    </div>\n    <div class=\"col-md-10\">\n      <div class=\"card-body\">\n        <h5 class=\"card-title\"><a [text]=\"tweet.user.name\" [href]=\"tweet.user.profileUrl\" target=\"_blank\"></a></h5>\n        <p class=\"card-text\">{{ tweet.text }}</p>\n        <div [innerHTML]=\"tweet.source\"></div>\n        <p class=\"card-text\">\n          <small class=\"text-muted\">{{ tweet.createdAt | date:'medium' }}</small>\n        </p>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -191,6 +214,69 @@ var TwitterListComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/twitter/twitter-trend/twitter-trend.component.html":
+/*!********************************************************************!*\
+  !*** ./src/app/twitter/twitter-trend/twitter-trend.component.html ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <div class=\"col-md-12\">\n    <ul class=\"list-group\">\n      <li *ngFor=\"let trend of trends\" class=\"list-group-item\">\n        <a [routerLink]=\"['/tweets', trend.query]\">{{trend.name}}</a>\n      </li>\n    </ul>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/twitter/twitter-trend/twitter-trend.component.sass":
+/*!********************************************************************!*\
+  !*** ./src/app/twitter/twitter-trend/twitter-trend.component.sass ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3R3aXR0ZXIvdHdpdHRlci10cmVuZC90d2l0dGVyLXRyZW5kLmNvbXBvbmVudC5zYXNzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/twitter/twitter-trend/twitter-trend.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/twitter/twitter-trend/twitter-trend.component.ts ***!
+  \******************************************************************/
+/*! exports provided: TwitterTrendComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TwitterTrendComponent", function() { return TwitterTrendComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _twitter_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../twitter.service */ "./src/app/twitter/twitter.service.ts");
+
+
+
+var TwitterTrendComponent = /** @class */ (function () {
+    function TwitterTrendComponent(twitterService) {
+        this.twitterService = twitterService;
+    }
+    TwitterTrendComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.twitterService.getTrends(1).subscribe(function (trends) {
+            _this.trends = trends;
+        }, function (error) { return console.log(error); });
+    };
+    TwitterTrendComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-twitter-trend',
+            template: __webpack_require__(/*! ./twitter-trend.component.html */ "./src/app/twitter/twitter-trend/twitter-trend.component.html"),
+            styles: [__webpack_require__(/*! ./twitter-trend.component.sass */ "./src/app/twitter/twitter-trend/twitter-trend.component.sass")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_twitter_service__WEBPACK_IMPORTED_MODULE_2__["TwitterService"]])
+    ], TwitterTrendComponent);
+    return TwitterTrendComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/twitter/twitter.component.html":
 /*!************************************************!*\
   !*** ./src/app/twitter/twitter.component.html ***!
@@ -198,7 +284,7 @@ var TwitterListComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-md-2\">&nbsp;</div>\n  <div class=\"col-md-8\">\n    <div id=\"tweetsPanel\" class=\"panel panel-default\">\n      <div class=\"panel-heading\">\n        <h3 class=\"panel-title\">Tweets</h3>\n      </div>\n      <div class=\"panel-body\">\n        <div class=\"row\">\n          <div class=\"col-md-12\">\n            <div class=\"form-group\">\n              <input type=\"text\"\n                     class=\"form-control\"\n                     placeholder=\"Search HashTag\"\n                     (keyup.enter)=\"getTweets()\"\n                     [(ngModel)]=\"hashTag\" />\n            </div>\n          </div>\n        </div>\n        <div class=\"row\">\n          <div class=\"col-md-12\">\n            <ul class=\"list-group\">\n              <li *ngFor=\"let tweet of tweets\" class=\"list-group-item\">\n                <app-twitter-list\n                  [tweet]=\"tweet\">\n                </app-twitter-list>\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-md-2\">&nbsp;</div>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col-md-2\">&nbsp;</div>\n  <div class=\"col-md-8\">\n    <div id=\"tweetsPanel\" class=\"panel panel-default\">\n      <div class=\"panel-body\">\n        <div class=\"row\" [hidden]=\"isHideSearchBar\">\n          <div class=\"col-md-12\">\n            <div class=\"form-group\">\n              <input type=\"text\"\n                     class=\"form-control\"\n                     placeholder=\"Search HashTag\"\n                     (keyup.enter)=\"getTweets()\"\n                     [(ngModel)]=\"hashTag\" />\n            </div>\n          </div>\n        </div>\n        <div class=\"row\">\n          <div class=\"col-md-12\">\n            <div *ngFor=\"let tweet of tweets\">\n              <app-twitter-list\n                [tweet]=\"tweet\">\n              </app-twitter-list>\n            </div>\n\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"col-md-2\">&nbsp;</div>\n</div>\n"
 
 /***/ }),
 
@@ -226,20 +312,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _twitter_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./twitter.service */ "./src/app/twitter/twitter.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
 
 
 
 var TwitterComponent = /** @class */ (function () {
-    function TwitterComponent(twitterService) {
+    function TwitterComponent(twitterService, route) {
         this.twitterService = twitterService;
+        this.route = route;
         this.hashTag = "";
+        this.isHideSearchBar = false;
     }
     TwitterComponent.prototype.ngOnInit = function () {
+        var query = this.route.snapshot.paramMap.get('query');
+        if (query != null) {
+            this.hashTag = query;
+            this.isHideSearchBar = true;
+            this.getTweets();
+        }
     };
     TwitterComponent.prototype.getTweets = function () {
         var _this = this;
         if (!this.hashTag)
             return;
+        if (this.hashTag.startsWith("#")) {
+            this.hashTag = this.hashTag.replace("#", "");
+        }
         this.twitterService.getTweets(this.hashTag).subscribe(function (tweets) {
             _this.tweets = tweets;
         }, function (error) { return console.log(error); });
@@ -250,7 +349,8 @@ var TwitterComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./twitter.component.html */ "./src/app/twitter/twitter.component.html"),
             styles: [__webpack_require__(/*! ./twitter.component.sass */ "./src/app/twitter/twitter.component.sass")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_twitter_service__WEBPACK_IMPORTED_MODULE_2__["TwitterService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_twitter_service__WEBPACK_IMPORTED_MODULE_2__["TwitterService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
     ], TwitterComponent);
     return TwitterComponent;
 }());
@@ -278,10 +378,13 @@ __webpack_require__.r(__webpack_exports__);
 var TwitterService = /** @class */ (function () {
     function TwitterService(httpClient) {
         this.httpClient = httpClient;
-        this.URL = "/api/v1/tweets/";
+        this.URL = "/api/v1/";
     }
     TwitterService.prototype.getTweets = function (hashTag) {
-        return this.httpClient.get(this.URL + "%23" + hashTag);
+        return this.httpClient.get(this.URL + "tweets/%23" + hashTag);
+    };
+    TwitterService.prototype.getTrends = function (id) {
+        return this.httpClient.get(this.URL + "trends/" + id);
     };
     TwitterService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),

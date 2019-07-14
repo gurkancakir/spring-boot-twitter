@@ -30,3 +30,9 @@ npm run start
 ng serve --proxy-config proxy-config.json
 ```
 4. Create postbuild and predeploy script in package.json
+
+## heroku config
+```javascript
+heroku config:set MAVEN_SETTINGS_PATH=settings.xml
+git push heroku master
+```
